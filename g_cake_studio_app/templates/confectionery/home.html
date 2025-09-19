@@ -1,0 +1,72 @@
+{% extends 'confectionery/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="welcome-section">
+    <div class="welcome-content">
+        <h1>Добро пожаловать в G_cake_studio</h1>
+        <p class="slogan">Авторские десерты с любовью</p>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-text">
+                <h1>Наша кондитерская</h1>
+                <p>G_cake_studio создает неповторимые десерты с 2022 года. Мы используем только натуральные ингредиенты и традиционные рецепты с современными нотками.</p>
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Экологично</h3>
+                        <p>Наши продукты — это гармония природы и вкуса. Мы бережно выбираем сырьё, чтобы сохранить чистоту и пользу каждого ингредиента.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <h3>С любовью</h3>
+                        <p>Каждое изделие создаётся вручную с заботой о вас. Мы вкладываем душу в наши десерты, чтобы дарить вам радость и тепло.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Качество</h3>
+                        <p>Только натуральные ингредиенты высшего качества. Никаких компромиссов — только лучшее для вашего удовольствия.</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-heart"></i>
+                        <h3>Индивидуальный подход</h3>
+                        <p>Ваши желания — наш главный рецепт. Готовим персональные десерты, учитывая ваши предпочтения и особенности.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="popular-section">
+    <div class="container">
+        <h2>Наши популярные изделия</h2>
+        <div class="popular-items">
+            <div class="popular-item">
+                <img src="{% static 'confectionery/images/Торт.jpg' %}" alt="Торт" class="small-image">
+                <h3>Авторские торты</h3>
+                <p>Индивидуальный дизайн для вашего праздника.</p>
+            </div>
+            <div class="popular-item">
+                <img src="{% static 'confectionery/images/Трайфлы.jpg' %}" alt="Трайфлы" class="small-image">
+                <h3>Трайфлы</h3>
+                <p>Нежные и воздушные, с разными начинками.</p>
+            </div>
+            <div class="popular-item">
+                <img src="{% static 'confectionery/images/Зефир.jpg' %}" alt="Зефир" class="small-image">
+                <h3>Зефир</h3>
+                <p>Цветочный, с большим набором цветов.</p>
+            </div>
+            <div class="popular-item">
+                <img src="{% static 'confectionery/images/Пирожные-эскимо.jpg' %}" alt="Пирожные-эскимо" class="small-image">
+                <h3>Пирожные-эскимо</h3>
+                <p>Вкуснейшие и в любом количестве.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

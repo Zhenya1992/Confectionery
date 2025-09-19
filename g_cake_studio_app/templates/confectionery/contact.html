@@ -1,0 +1,100 @@
+{% extends 'confectionery/base.html' %}
+{% load static %}
+
+{% block title %}Контакты | {{ block.super }}{% endblock %}
+
+{% block content %}
+<section id="contacts" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Наши контакты</h2>
+        
+        <div class="row">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h3 class="h4 mb-4">Контактная информация</h3>
+                        
+                        <div class="contact-info mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-map-marker-alt me-3 text-primary fa-lg"></i>
+                                <div>
+                                    <h5 class="h6 mb-0">Адрес</h5>
+                                    <p class="mb-0">г. Мозырь, ул. Рыжкова, д.53</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-phone-alt me-3 text-primary fa-lg"></i>
+                                <div>
+                                    <h5 class="h6 mb-0">Телефон</h5>
+                                    <p class="mb-0">+375 (29) 561 96 08</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-envelope me-3 text-primary fa-lg"></i>
+                                <div>
+                                    <h5 class="h6 mb-0">Email</h5>
+                                    <p class="mb-0">info@g_cake_studio.ru</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-clock me-3 text-primary fa-lg"></i>
+                                <div>
+                                    <h5 class="h6 mb-0">Часы работы</h5>
+                                    <p class="mb-0">Ежедневно с 9:00 до 21:00</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links mt-4">
+                            <h5 class="h6 mb-3">Мы в соцсетях:</h5>
+                            <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="fab fa-instagram me-1"></i> Instagram</a>
+                            <a href="#" class="btn btn-outline-primary me-2 mb-2"><i class="fab fa-vk me-1"></i> ВКонтакте</a>
+                            <a href="#" class="btn btn-outline-primary mb-2"><i class="fab fa-telegram me-1"></i> Telegram</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h3 class="h4 mb-4">Форма обратной связи</h3>
+                        <form method="post" action="{% url 'confectionery:contact_form' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Ваше имя</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Сообщение</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-5">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2b3c4d5e6f7g8h9i0j&amp;source=constructor" 
+                        frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

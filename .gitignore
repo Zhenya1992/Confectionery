@@ -1,3 +1,6 @@
 .idea
 venv/
 db.sqlite3
+media/
+static/confectionery/images
+staticfiles/

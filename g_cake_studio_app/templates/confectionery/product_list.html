@@ -1,0 +1,25 @@
+{% extends 'confectionery/base.html' %}
+
+{% block content %}
+<div class="product-list-container">
+    <h1>Наши кондитерские изделия</h1>
+
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% endif %}
+            <div class="product-info">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description|truncatechars:100 }}</p>
+                <div class="product-footer">
+                    <span class="product-price">{{ product.price }} руб.</span>
+                    <a href="{% url 'add_to_cart' product.id %}" class="add-to-cart-btn">В корзину</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Кондитерская G_cake_studio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'confectionery/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="{% static 'confectionery/images/icons.ico' %}" type="image/png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <nav>
+                    <div class="nav-links">
+                        <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Главная</a>
+                        <a href="{% url 'product_list' %}" class="{% if request.path == '/products/' %}active{% endif %}">Продукция</a>
+                        <a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}">О нас</a>
+                        <a href="{% url 'reviews' %}" class="{% if request.path == '/reviews/' %}active{% endif %}">Отзывы</a>
+                    </div>
+                    <div class="auth-links">
+                        {% if user.is_authenticated %}
+                            <span class="username">Привет, {{ user.username }}!</span>
+                            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="auth-link login-btn">Выйти</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="auth-link">Войти</a>
+                            <a href="{% url 'register' %}" class="auth-link">Регистрация</a>
+                        {% endif %}
+                        <a href="{% url 'cart' %}" class="cart-link">Корзина ({{ cart_items_count|default:0 }})</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+<main>
+    <div class="container">
+
+        {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+              <div class="alert">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+        <footer class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/golenko.cake27/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://vk.com/juliagolenko13" target="_blank" rel="noopener" aria-label="VK">
+                    <i class="fab fa-vk"></i>
+                </a>
+                <a href="https://t.me/julia1210" target="_blank" rel="noopener" aria-label="Telegram">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <div class="contact-info">
+                <p>г. Мозырь, ул. Рыжкова, 53 | +375 (29) 561-96-08</p>
+                <p>Часы работы: 9:00 - 21:00 без выходных</p>
+            </div>
+            <div class="copyright">
+                © Кондитерская G_cake_studio <span id="current-year"></span>
+            </div>
+        </footer>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+</body>
+</html>
