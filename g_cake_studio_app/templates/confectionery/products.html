@@ -1,0 +1,41 @@
+{% extends 'confectionery/base.html' %}
+{% load static %}
+
+{% block title %}Продукция | Sweet Dreams{% endblock %}
+
+{% block content %}
+<section class="product-section">
+    <div class="product-list-container">
+        <div class="product-header">
+            <h1 class="page-title">Наши кондитерские изделия</h1>
+            <p class="page-subtitle">Авторские десерты ручной работы</p>
+        </div>
+
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <div class="product-info">
+                    <div class="product-text">
+                        <h3 class="product-name">{{ product.name }}</h3>
+                    </div>
+                    <div class="product-image-container">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+                        {% endif %}
+                    </div>
+                    <div class="product-footer">
+                        <span class="product-price">{{ product.price }} руб.</span>
+                        <form action="{% url 'add_to_cart' product.id %}" method="post" class="add-to-cart-form">
+                            {% csrf_token %}
+                            <button type="submit" class="add-to-cart-btn">
+                            <i class="fas fa-shopping-cart"></i> В корзину
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

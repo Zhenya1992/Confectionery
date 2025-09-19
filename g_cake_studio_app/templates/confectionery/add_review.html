@@ -1,0 +1,101 @@
+{% extends 'confectionery/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Добавить отзыв</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <a href="{{ product.get_absolute_url }}" class="me-3">
+                            {% with product.images.first as image %}
+                            {% if image %}
+                            <img src="{{ image.image.url }}" alt="{{ product.name }}" width="80">
+                            {% else %}
+                            <img src="{% static 'images/no-image.jpg' %}" alt="No image" width="80">
+                            {% endif %}
+                            {% endwith %}
+                        </a>
+                        <div>
+                            <h4 class="mb-0">{{ product.name }}</h4>
+                            <p class="text-muted mb-0">{{ product.price }} ₽</p>
+                        </div>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label class="form-label">Ваша оценка</label>
+                            <div class="rating-input">
+                                {% for i in "54321" %}
+                                <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}"
+                                       {% if form.rating.value == i %}checked{% endif %}>
+                                <label for="star{{ i }}">★</label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_advantages" class="form-label">Достоинства</label>
+                            <textarea class="form-control" id="id_advantages" name="advantages"
+                                      rows="3" placeholder="Что вам понравилось?">{{ form.advantages.value|default_if_none:'' }}</textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_disadvantages" class="form-label">Недостатки</label>
+                            <textarea class="form-control" id="id_disadvantages" name="disadvantages"
+                                      rows="3" placeholder="Что можно улучшить?">{{ form.disadvantages.value|default_if_none:'' }}</textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="id_comment" class="form-label">Комментарий</label>
+                            <textarea class="form-control" id="id_comment" name="comment"
+                                      rows="5" required>{{ form.comment.value|default_if_none:'' }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Отправить отзыв
+                            </button>
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-outline-secondary">
+                                Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    .rating-input input {
+        display: none;
+    }
+    .rating-input label {
+        font-size: 2rem;
+        color: #ddd;
+        cursor: pointer;
+        padding: 0 5px;
+    }
+    .rating-input input:checked ~ label,
+    .rating-input input:hover ~ label {
+        color: gold;
+    }
+    .rating-input label:hover,
+    .rating-input label:hover ~ label {
+        color: gold;
+    }
+</style>
+{% endblock %}

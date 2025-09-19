@@ -1,0 +1,138 @@
+{% extends 'confectionery/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Заказ #{{ order.order_number }}</h1>
+        <span class="badge
+            {% if order.status == 'delivered' %}bg-success
+            {% elif order.status == 'cancelled' %}bg-danger
+            {% else %}bg-primary{% endif %}">
+            {{ order.get_status_display }}
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Состав заказа</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th class="text-end">Итого</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <a href="{{ item.product.get_absolute_url }}" class="me-3">
+                                                {% if item.product.image %}
+                                                    <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" width="60">
+                                                {% else %}
+                                                    <img src="{% static 'images/no-image.jpg' %}" alt="No image" width="60">
+                                                {% endif %}
+                                            </a>
+
+                                            <div>
+                                                <a href="{{ item.product.get_absolute_url }}" class="text-decoration-none">
+                                                    {{ item.product.name }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>{{ item.price }} ₽</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td class="text-end">{{ item.total_price }} ₽</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3">Итого</th>
+                                    <th class="text-end">{{ order.total_price }} ₽</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Информация о заказе</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6>Дата заказа</h6>
+                        <p>{{ order.created_at|date:"d.m.Y H:i" }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Способ оплаты</h6>
+                        <p>{{ order.get_payment_method_display }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Статус оплаты</h6>
+                        <p>
+                            {% if order.is_paid %}
+                            <span class="badge bg-success">Оплачен</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">Ожидает оплаты</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Данные доставки</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6>Адрес доставки</h6>
+                        <p>{{ order.delivery_address }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Телефон</h6>
+                        <p>{{ order.phone_number }}</p>
+                    </div>
+
+                    {% if order.notes %}
+                    <div class="mb-3">
+                        <h6>Комментарий</h6>
+                        <p>{{ order.notes }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+        <a href="{% url 'order_history' %}" class="btn btn-outline-secondary me-md-2">
+            <i class="fas fa-arrow-left me-2"></i>Назад к списку заказов
+        </a>
+        <button class="btn btn-primary" onclick="window.print()">
+            <i class="fas fa-print me-2"></i>Распечатать
+        </button>
+    </div>
+</div>
+{% endblock %}

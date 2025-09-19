@@ -1,0 +1,9 @@
+{% extends 'confectionery/base.html' %}
+
+{% block content %}
+<div class="error404-container">
+    <h1 class="error404-title">404 — Страница не найдена</h1>
+    <p class="error404-message">Кажется, вы попали не туда 😕</p>
+    <a href="{% url 'home' %}" class="error404-home-link">На главную</a>
+</div>
+{% endblock %}
