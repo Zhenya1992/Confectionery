@@ -33,7 +33,7 @@ class ProductListView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Product.objects.filter(available=True).order_by('created_at')
+        return Product.objects.filter(is_available=True).order_by('created_at')
 
 
 def about(request):
