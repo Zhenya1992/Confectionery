@@ -1,6 +1,8 @@
 {% extends 'confectionery/base.html' %}
 {% load static %}
 
+{% block title %}Главная - G_cake_studio{% endblock %}
+
 {% block content %}
 <section class="welcome-section">
     <div class="welcome-content">
@@ -10,31 +12,33 @@
 </section>
 
 <section class="about-section">
-    <div class="container">
-        <div class="about-content">
+    <div class="about-content">
             <div class="about-text">
-                <h1>Наша кондитерская</h1>
-                <p>G_cake_studio создает неповторимые десерты с 2022 года. Мы используем только натуральные ингредиенты и традиционные рецепты с современными нотками.</p>
+                <h2>Наша кондитерская</h2>
+                <p>G_cake_studio создает неповторимые десерты с 2022 года.
+                    Мы используем только натуральные ингредиенты и традиционные рецепты
+                    с современными нотками.
+                </p>
                 <div class="features">
                     <div class="feature">
                         <i class="fas fa-leaf"></i>
                         <h3>Экологично</h3>
-                        <p>Наши продукты — это гармония природы и вкуса. Мы бережно выбираем сырьё, чтобы сохранить чистоту и пользу каждого ингредиента.</p>
+                        <p>Мы бережно выбираем сырьё, чтобы сохранить чистоту и пользу каждого ингредиента.</p>
                     </div>
                     <div class="feature">
                         <i class="fas fa-heart"></i>
                         <h3>С любовью</h3>
-                        <p>Каждое изделие создаётся вручную с заботой о вас. Мы вкладываем душу в наши десерты, чтобы дарить вам радость и тепло.</p>
+                        <p>Каждое изделие создаётся вручную с заботой о вас.</p>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-leaf"></i>
+                        <i class="fas fa-star"></i>
                         <h3>Качество</h3>
-                        <p>Только натуральные ингредиенты высшего качества. Никаких компромиссов — только лучшее для вашего удовольствия.</p>
+                        <p>Только натуральные ингредиенты высшего качества.</p>
                     </div>
                     <div class="feature">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-user-check"></i>
                         <h3>Индивидуальный подход</h3>
-                        <p>Ваши желания — наш главный рецепт. Готовим персональные десерты, учитывая ваши предпочтения и особенности.</p>
+                        <p>Готовим персональные десерты, учитывая ваши предпочтения.</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +51,7 @@
         <h2>Наши популярные изделия</h2>
         <div class="popular-items">
             <div class="popular-item">
-                <img src="{% static 'confectionery/images/Торт.jpg' %}" alt="Торт" class="small-image">
+                <img src="{% static 'confectionery/images/Торт.jpg' %}" alt="Авторские торты" class="small-image">
                 <h3>Авторские торты</h3>
                 <p>Индивидуальный дизайн для вашего праздника.</p>
             </div>
@@ -62,9 +66,14 @@
                 <p>Цветочный, с большим набором цветов.</p>
             </div>
             <div class="popular-item">
-                <img src="{% static 'confectionery/images/Пирожные-эскимо.jpg' %}" alt="Пирожные-эскимо" class="small-image">
+                <img src="{% static 'confectionery/images/Пирожные-эскимо.jpg' %}" alt="Пирожные эскимо" class="small-image">
                 <h3>Пирожные-эскимо</h3>
                 <p>Вкуснейшие и в любом количестве.</p>
+            </div>
+            <div class="popular-item">
+                <img src="{% static 'confectionery/images/Моти.jpg' %}" alt="Моти" class="small-image">
+                <h3>Моти</h3>
+                <p>Нежнейшие и манящие.</p>
             </div>
         </div>
     </div>

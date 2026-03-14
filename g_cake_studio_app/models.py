@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.urls import reverse
-
+import uuid
 
 class Product(models.Model):
     """Класс моделей продуктов"""
@@ -66,10 +66,13 @@ class CartItem(models.Model):
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
 
+    @property
+    def total_price(self):
+        return self.product.price * self.quantity
+
     class Meta:
         verbose_name = 'Элемент корзины'
         verbose_name_plural = 'Элементы корзины'
-
 
 class Order(models.Model):
     """Класс моделей для заказов"""
@@ -119,3 +122,11 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product} x {self.quantity}"
+
+class TelegramAuthToken(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.token}"

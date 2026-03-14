@@ -7,9 +7,9 @@
     <title>{% block title %}Кондитерская G_cake_studio{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'confectionery/css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="shortcut icon" href="{% static 'confectionery/images/icons.ico' %}" type="image/png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="wrapper">
@@ -29,31 +29,37 @@
                                 {% csrf_token %}
                                 <button type="submit" class="auth-link login-btn">Выйти</button>
                             </form>
+                            <a href="{% url 'cart' %}" class="cart-link">Корзина
+                                {% with cart_items_count=request.user.cartitem_set.count %}
+                                    {% if cart_items_count > 0 %}
+                                    <span class="cart-count">{{ cart_items_count }}</span>
+                                    {% endif %}
+                                {% endwith %}
+                            </a>
                         {% else %}
                             <a href="{% url 'login' %}" class="auth-link">Войти</a>
                             <a href="{% url 'register' %}" class="auth-link">Регистрация</a>
                         {% endif %}
-                        <a href="{% url 'cart' %}" class="cart-link">Корзина ({{ cart_items_count|default:0 }})</a>
                     </div>
                 </nav>
             </div>
         </header>
+        <main>
+            <div class="container">
+                {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
-<main>
-    <div class="container">
-
-        {% if messages %}
-          <div class="messages">
-            {% for message in messages %}
-              <div class="alert">{{ message }}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        {% block content %}{% endblock %}
-    </div>
-</main>
-
+                {% block content %}{% endblock %}
+            </div>
+        </main>
         <footer class="container">
             <div class="social-links">
                 <a href="https://www.instagram.com/golenko.cake27/" target="_blank" rel="noopener" aria-label="Instagram">
@@ -75,6 +81,12 @@
             </div>
         </footer>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Текущий год в футере
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

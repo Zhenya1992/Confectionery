@@ -29,10 +29,12 @@
                        Вы можете отслеживать статус заказа в <a href="{% url 'order_history' %}">истории заказов</a>.</p>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg me-md-3">
+                        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg me-md-3"
+                            style="background: #d23c3c !important; border-color: #d23c3c !important; color: white !important;">
                             <i class="fas fa-shopping-bag me-2"></i>Продолжить покупки
                         </a>
-                        <a href="{% url 'order_detail' order.id %}" class="btn btn-outline-secondary btn-lg">
+                        <a href="{% url 'order_detail' order.id %}" class="btn btn-outline-secondary btn-lg"
+                        style="background: #28a745 !important; border-color: #28a745 !important; color: white !important;">
                             <i class="fas fa-file-alt me-2"></i>Детали заказа
                         </a>
                     </div>
